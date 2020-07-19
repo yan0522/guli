@@ -5,6 +5,8 @@ import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduChapter;
 import com.atguigu.eduservice.entity.chapter.ChapterVo;
 import com.atguigu.eduservice.service.EduChapterService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.List;
  * @author testjava
  * @since 2020-03-02
  */
+@Api(description = "章节管理")
 @RestController
 @RequestMapping("/eduservice/chapter")
 //@CrossOrigin
@@ -27,6 +30,7 @@ public class EduChapterController {
     private EduChapterService chapterService;
 
     //课程大纲列表,根据课程id进行查询
+    @ApiOperation(value = "根据课程id查询大纲列表")
     @GetMapping("getChapterVideo/{courseId}")
     public R getChapterVideo(@PathVariable String courseId) {
         List<ChapterVo> list = chapterService.getChapterVideoByCourseId(courseId);
@@ -34,6 +38,7 @@ public class EduChapterController {
     }
 
     //添加章节
+    @ApiOperation(value = "添加章节")
     @PostMapping("addChapter")
     public R addChapter(@RequestBody EduChapter eduChapter) {
         chapterService.save(eduChapter);
@@ -41,6 +46,7 @@ public class EduChapterController {
     }
 
     //根据章节id查询
+    @ApiOperation(value = "根据章节id查询")
     @GetMapping("getChapterInfo/{chapterId}")
     public R getChapterInfo(@PathVariable String chapterId) {
         EduChapter eduChapter = chapterService.getById(chapterId);
@@ -48,6 +54,7 @@ public class EduChapterController {
     }
 
     //修改章节
+    @ApiOperation(value = "修改章节")
     @PostMapping("updateChapter")
     public R updateChapter(@RequestBody EduChapter eduChapter) {
         chapterService.updateById(eduChapter);
@@ -55,6 +62,7 @@ public class EduChapterController {
     }
 
     //删除的方法
+    @ApiOperation(value = "删除章节")
     @DeleteMapping("{chapterId}")
     public R deleteChapter(@PathVariable String chapterId) {
         boolean flag = chapterService.deleteChapter(chapterId);

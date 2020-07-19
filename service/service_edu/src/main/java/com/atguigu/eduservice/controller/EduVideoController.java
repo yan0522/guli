@@ -6,6 +6,8 @@ import com.atguigu.eduservice.client.VodClient;
 import com.atguigu.eduservice.entity.EduVideo;
 import com.atguigu.eduservice.service.EduVideoService;
 import com.atguigu.servicebase.exceptionhandler.GuliException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * @author testjava
  * @since 2020-03-02
  */
+@Api(description = "小节管理")
 @RestController
 @RequestMapping("/eduservice/video")
 //@CrossOrigin
@@ -31,6 +34,7 @@ public class EduVideoController {
     private VodClient vodClient;
 
     //添加小节
+    @ApiOperation(value = "添加小节")
     @PostMapping("addVideo")
     public R addVideo(@RequestBody EduVideo eduVideo) {
         videoService.save(eduVideo);
@@ -38,6 +42,7 @@ public class EduVideoController {
     }
 
     //删除小节，删除对应阿里云视频
+    @ApiOperation(value = "删除小节，删除对应阿里云视频")
     @DeleteMapping("{id}")
     public R deleteVideo(@PathVariable String id) {
         //根据小节id获取视频id，调用方法实现视频删除

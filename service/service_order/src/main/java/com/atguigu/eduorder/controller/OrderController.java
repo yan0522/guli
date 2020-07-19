@@ -6,6 +6,8 @@ import com.atguigu.commonutils.R;
 import com.atguigu.eduorder.entity.Order;
 import com.atguigu.eduorder.service.OrderService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author testjava
  * @since 2020-03-13
  */
+@Api(description = "订单管理")
 @RestController
 @RequestMapping("/eduorder/order")
 //@CrossOrigin
@@ -28,6 +31,7 @@ public class OrderController {
     private OrderService orderService;
 
     //1 生成订单的方法
+    @ApiOperation(value = "生成订单")
     @PostMapping("createOrder/{courseId}")
     public R saveOrder(@PathVariable String courseId, HttpServletRequest request) {
         //创建订单，返回订单号
@@ -37,6 +41,7 @@ public class OrderController {
     }
 
     //2 根据订单id查询订单信息
+    @ApiOperation(value = "根据订单id查询订单信息")
     @GetMapping("getOrderInfo/{orderId}")
     public R getOrderInfo(@PathVariable String orderId) {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
@@ -46,6 +51,7 @@ public class OrderController {
     }
 
     //根据课程id和用户id查询订单表中订单状态
+    @ApiOperation(value = "根据课程id和用户id查询订单表中订单状态")
     @GetMapping("isBuyCourse/{courseId}/{memberId}")
     public boolean isBuyCourse(@PathVariable String courseId,@PathVariable String memberId) {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();

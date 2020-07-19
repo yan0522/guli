@@ -4,6 +4,7 @@ package com.atguigu.aclservice.controller;
 import com.atguigu.aclservice.entity.Permission;
 import com.atguigu.aclservice.service.PermissionService;
 import com.atguigu.commonutils.R;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author testjava
  * @since 2020-01-12
  */
+@Api(description = "权限管理")
 @RestController
 @RequestMapping("/admin/acl/permission")
 //@CrossOrigin

@@ -6,6 +6,7 @@ import com.atguigu.aclservice.service.RoleService;
 import com.atguigu.commonutils.R;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.List;
  * @author testjava
  * @since 2020-01-12
  */
+@Api(description = "角色管理")
 @RestController
 @RequestMapping("/admin/acl/role")
 //@CrossOrigin

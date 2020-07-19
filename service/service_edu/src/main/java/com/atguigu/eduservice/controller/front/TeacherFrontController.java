@@ -7,12 +7,15 @@ import com.atguigu.eduservice.service.EduCourseService;
 import com.atguigu.eduservice.service.EduTeacherService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
+@Api(description = "前端页面讲师管理")
 @RestController
 @RequestMapping("/eduservice/teacherfront")
 //@CrossOrigin
@@ -25,6 +28,7 @@ public class TeacherFrontController {
     private EduCourseService courseService;
 
     //1 分页查询讲师的方法
+    @ApiOperation(value = "分页查询讲师")
     @PostMapping("getTeacherFrontList/{page}/{limit}")
     public R getTeacherFrontList(@PathVariable long page,@PathVariable long limit) {
         Page<EduTeacher> pageTeacher = new Page<>(page,limit);
@@ -34,6 +38,7 @@ public class TeacherFrontController {
     }
 
     //2 讲师详情的功能
+    @ApiOperation(value = "讲师详情")
     @GetMapping("getTeacherFrontInfo/{teacherId}")
     public R getTeacherFrontInfo(@PathVariable String teacherId) {
         //1 根据讲师id查询讲师基本信息

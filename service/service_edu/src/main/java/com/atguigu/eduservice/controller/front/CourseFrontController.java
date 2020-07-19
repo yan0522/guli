@@ -11,6 +11,8 @@ import com.atguigu.eduservice.entity.frontvo.CourseWebVo;
 import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
+@Api(description = "前端页面课程管理")
 @RestController
 @RequestMapping("/eduservice/coursefront")
 //@CrossOrigin
@@ -34,6 +37,7 @@ public class CourseFrontController {
     private OrdersClient ordersClient;
 
     //1 条件查询带分页查询课程
+    @ApiOperation(value = "条件查询带分页查询课程")
     @PostMapping("getFrontCourseList/{page}/{limit}")
     public R getFrontCourseList(@PathVariable long page, @PathVariable long limit,
                                 @RequestBody(required = false) CourseFrontVo courseFrontVo) {
@@ -44,6 +48,7 @@ public class CourseFrontController {
     }
 
     //2 课程详情的方法
+    @ApiOperation(value = "查询课程详情")
     @GetMapping("getFrontCourseInfo/{courseId}")
     public R getFrontCourseInfo(@PathVariable String courseId, HttpServletRequest request) {
         //根据课程id，编写sql语句查询课程信息
@@ -56,6 +61,7 @@ public class CourseFrontController {
     }
 
     //根据课程id查询课程信息
+    @ApiOperation(value = "根据id查询课程信息")
     @PostMapping("getCourseInfoOrder/{id}")
     public CourseWebVoOrder getCourseInfoOrder(@PathVariable String id) {
         CourseWebVo courseInfo = courseService.getBaseCourseInfo(id);

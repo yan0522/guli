@@ -1,10 +1,7 @@
 package com.atguigu.vod.controller;
 
-import com.aliyun.oss.ClientException;
 import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
-import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.atguigu.commonutils.R;
@@ -12,13 +9,15 @@ import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.atguigu.vod.Utils.ConstantVodUtils;
 import com.atguigu.vod.Utils.InitVodCilent;
 import com.atguigu.vod.service.VodService;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@Api(description = "视频管理")
 @RestController
 @RequestMapping("/eduvod/video")
 //@CrossOrigin
@@ -28,6 +27,7 @@ public class VodController {
     private VodService vodService;
 
     //上传视频到阿里云
+    @ApiOperation(value = "上传视频到阿里云")
     @PostMapping("uploadAlyiVideo")
     public R uploadAlyiVideo(MultipartFile file) {
         //返回上传视频id
@@ -36,6 +36,7 @@ public class VodController {
     }
 
     //根据视频id删除阿里云视频
+    @ApiOperation(value = "根据视频id删除阿里云视频")
     @DeleteMapping("removeAlyVideo/{id}")
     public R removeAlyVideo(@PathVariable String id) {
         try {
@@ -56,6 +57,7 @@ public class VodController {
 
     //删除多个阿里云视频的方法
     //参数多个视频id  List videoIdList
+    @ApiOperation(value = "删除多个阿里云视频")
     @DeleteMapping("delete-batch")
     public R deleteBatch(@RequestParam("videoIdList") List<String> videoIdList) {
         vodService.removeMoreAlyVideo(videoIdList);
@@ -63,6 +65,7 @@ public class VodController {
     }
 
     //根据视频id获取视频凭证
+    @ApiOperation(value = "根据视频id获取视频凭证")
     @GetMapping("getPlayAuth/{id}")
     public R getPlayAuth(@PathVariable String id) {
         try {

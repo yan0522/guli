@@ -6,7 +6,8 @@ import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.service.EduCourseService;
-import org.springframework.beans.BeanUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * @author testjava
  * @since 2020-03-02
  */
+@Api(description="课程管理")
 @RestController
 @RequestMapping("/eduservice/course")
 //@CrossOrigin
@@ -30,6 +32,7 @@ public class EduCourseController {
 
     //课程列表 基本实现
     //TODO  完善条件查询带分页
+    @ApiOperation(value = "获取课程列表")
     @GetMapping
     public R getCourseList() {
         List<EduCourse> list = courseService.list(null);
@@ -37,6 +40,7 @@ public class EduCourseController {
     }
 
     //添加课程基本信息的方法
+    @ApiOperation(value = "添加课程基本信息")
     @PostMapping("addCourseInfo")
     public R addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
         //返回添加之后课程id，为了后面添加大纲使用
@@ -45,6 +49,7 @@ public class EduCourseController {
     }
 
     //根据课程id查询课程基本信息
+    @ApiOperation(value = "根据课程id查询课程基本信息")
     @GetMapping("getCourseInfo/{courseId}")
     public R getCourseInfo(@PathVariable String courseId) {
         CourseInfoVo courseInfoVo = courseService.getCourseInfo(courseId);
@@ -52,6 +57,7 @@ public class EduCourseController {
     }
 
     //修改课程信息
+    @ApiOperation(value = "修改课程信息")
     @PostMapping("updateCourseInfo")
     public R updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
         courseService.updateCourseInfo(courseInfoVo);
@@ -59,6 +65,7 @@ public class EduCourseController {
     }
 
     //根据课程id查询课程确认信息
+    @ApiOperation(value = "根据课程id查询课程确认信息")
     @GetMapping("getPublishCourseInfo/{id}")
     public R getPublishCourseInfo(@PathVariable String id) {
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(id);
@@ -67,6 +74,7 @@ public class EduCourseController {
 
     //课程最终发布
     //修改课程状态
+    @ApiOperation(value = "最终发布&修改课程状态")
     @PostMapping("publishCourse/{id}")
     public R publishCourse(@PathVariable String id) {
         EduCourse eduCourse = new EduCourse();
@@ -77,6 +85,7 @@ public class EduCourseController {
     }
 
     //删除课程
+    @ApiOperation(value = "删除课程")
     @DeleteMapping("{courseId}")
     public R deleteCourse(@PathVariable String courseId) {
         courseService.removeCourse(courseId);

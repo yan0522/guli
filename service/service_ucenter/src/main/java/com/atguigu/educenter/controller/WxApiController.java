@@ -7,16 +7,18 @@ import com.atguigu.educenter.utils.ConstantWxUtils;
 import com.atguigu.educenter.utils.HttpClientUtils;
 import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.google.gson.Gson;
-import org.bouncycastle.util.encoders.Base64Encoder;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import sun.misc.BASE64Encoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
 
 //@CrossOrigin
+@Api(description = "二维码管理")
 @Controller  //只是请求地址，不需要返回数据
 @RequestMapping("/api/ucenter/wx")
 public class WxApiController {
@@ -25,6 +27,7 @@ public class WxApiController {
     private UcenterMemberService memberService;
 
     //2 获取扫描人信息，添加数据
+    @ApiOperation(value = "获取扫描人数据，添加数据")
     @GetMapping("callback")
     public String callback(String code, String state) {
         try {
@@ -95,6 +98,7 @@ public class WxApiController {
     }
 
     //1 生成微信扫描二维码
+    @ApiOperation(value = "生成微信扫描二维码")
     @GetMapping("login")
     public String getWxCode() {
         //固定地址，后面拼接参数

@@ -3,8 +3,13 @@ package com.atguigu.eduorder.controller;
 
 import com.atguigu.commonutils.R;
 import com.atguigu.eduorder.service.PayLogService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -16,6 +21,7 @@ import java.util.Map;
  * @author testjava
  * @since 2020-03-13
  */
+@Api(description = "微信支付管理")
 @RestController
 @RequestMapping("/eduorder/paylog")
 //@CrossOrigin
@@ -26,6 +32,7 @@ public class PayLogController {
 
     //生成微信支付二维码接口
     //参数是订单号
+    @ApiOperation(value = "生成微信支付二维码接口")
     @GetMapping("createNative/{orderNo}")
     public R createNative(@PathVariable String orderNo) {
         //返回信息，包含二维码地址，还有其他需要的信息
@@ -36,6 +43,7 @@ public class PayLogController {
 
     //查询订单支付状态
     //参数：订单号，根据订单号查询 支付状态
+    @ApiOperation(value = "查询订单支付状态")
     @GetMapping("queryPayStatus/{orderNo}")
     public R queryPayStatus(@PathVariable String orderNo) {
         Map<String,String> map = payLogService.queryPayStatus(orderNo);

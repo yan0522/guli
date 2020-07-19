@@ -3,6 +3,8 @@ package com.atguigu.staservice.controller;
 
 import com.atguigu.commonutils.R;
 import com.atguigu.staservice.service.StatisticsDailyService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,8 @@ import java.util.Map;
  * @author testjava
  * @since 2020-03-14
  */
+
+@Api(description = "统计管理")
 @RestController
 @RequestMapping("/staservice/sta")
 //@CrossOrigin
@@ -25,6 +29,7 @@ public class StatisticsDailyController {
     private StatisticsDailyService staService;
 
     //统计某一天注册人数,生成统计数据
+    @ApiOperation(value = "统计某一天注册人数，生成数据")
     @PostMapping("registerCount/{day}")
     public R registerCount(@PathVariable String day) {
         staService.registerCount(day);
@@ -32,6 +37,7 @@ public class StatisticsDailyController {
     }
 
     //图表显示，返回两部分数据，日期json数组，数量json数组
+    @ApiOperation(value = "图表显示")
     @GetMapping("showData/{type}/{begin}/{end}")
     public R showData(@PathVariable String type,@PathVariable String begin,
                       @PathVariable String end) {

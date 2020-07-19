@@ -3,15 +3,21 @@ package com.atguigu.msmservice.controller;
 import com.atguigu.commonutils.R;
 import com.atguigu.msmservice.service.MsmService;
 import com.atguigu.msmservice.utils.RandomUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Api(description = "短信验证")
 @RestController
 @RequestMapping("/edumsm/msm")
 //@CrossOrigin
@@ -24,6 +30,7 @@ public class MsmController {
     private RedisTemplate<String,String> redisTemplate;
 
     //发送短信的方法
+    @ApiOperation(value = "发送短信验证码")
     @GetMapping("send/{phone}")
     public R sendMsm(@PathVariable String phone) {
         //1 从redis获取验证码，如果获取到直接返回

@@ -6,14 +6,16 @@ import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduCourseService;
 import com.atguigu.eduservice.service.EduTeacherService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Api(description = "前端页面首页管理")
 @RestController
 @RequestMapping("/eduservice/indexfront")
 //@CrossOrigin
@@ -26,6 +28,7 @@ public class IndexFrontController {
     private EduTeacherService teacherService;
 
     //查询前8条热门课程，查询前4条名师
+    @ApiOperation(value = "查询前8条热门课程，查询前4条名师")
     @GetMapping("index")
     public R index() {
         //查询前8条热门课程

@@ -62,6 +62,7 @@ public class EduTeacherController {
     //3 分页查询讲师的方法
     //current 当前页
     //limit 每页记录数
+    @ApiOperation(value = "分页查询讲师")
     @GetMapping("pageTeacher/{current}/{limit}")
     public R pageListTeacher(@PathVariable long current,
                              @PathVariable long limit) {
@@ -92,6 +93,7 @@ public class EduTeacherController {
     }
 
     //4 条件查询带分页的方法
+    @ApiOperation(value = "条件查询带分页")
     @PostMapping("pageTeacherCondition/{current}/{limit}")
     public R pageTeacherCondition(@PathVariable long current,@PathVariable long limit,
                                   @RequestBody(required = false)  TeacherQuery teacherQuery) {
@@ -133,6 +135,7 @@ public class EduTeacherController {
     }
 
     //添加讲师接口的方法
+    @ApiOperation(value = "添加讲师")
     @PostMapping("addTeacher")
     public R addTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean save = teacherService.save(eduTeacher);
@@ -144,6 +147,7 @@ public class EduTeacherController {
     }
 
     //根据讲师id进行查询
+    @ApiOperation(value = "根据讲师id进行查询")
     @GetMapping("getTeacher/{id}")
     public R getTeacher(@PathVariable String id) {
         EduTeacher eduTeacher = teacherService.getById(id);
@@ -151,6 +155,7 @@ public class EduTeacherController {
     }
 
     //讲师修改功能
+    @ApiOperation(value = "修改讲师")
     @PostMapping("updateTeacher")
     public R updateTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean flag = teacherService.updateById(eduTeacher);
