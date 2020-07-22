@@ -206,6 +206,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>guli_parent</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
